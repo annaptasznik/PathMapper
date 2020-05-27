@@ -1,0 +1,2 @@
+rootProject.name='PathMapper'
+include ':app'

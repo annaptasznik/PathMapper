@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PathMapper</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiYW5wdDMzMDAiLCJhIjoiY2thb3VxdTFoMDB2bzJya2djNzRqajV4ayJ9.epFhZS_i3OdBoY_GH-h40A</string>
+</resources>

@@ -79,7 +79,7 @@ class MapsLayersActivity :
     private var currentlattext: String? = null
     private var currentlongtext: String? = null
     private lateinit var routePolyline: Polyline
-    private  var polylineOptions: PolylineOptions = PolylineOptions()
+    private  var routePolylineOptions: PolylineOptions = PolylineOptions()
     private var startLatLng = LatLng(0.0, 0.0)
 
 
@@ -269,10 +269,10 @@ class MapsLayersActivity :
             initPolyline()
         }
         else{
-            polylineOptions.points.add(LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude))
+            routePolylineOptions.points.add(LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude))
 
             routePolyline.remove()
-            routePolyline = map.addPolyline(polylineOptions)
+            routePolyline = map.addPolyline(routePolylineOptions)
 
             //polylineOptions.points.toList().toString()
 
@@ -285,12 +285,12 @@ class MapsLayersActivity :
 
     private fun initPolyline(){
 
-        polylineOptions.width(2F);
-        polylineOptions.color(Color.RED);
-        polylineOptions.geodesic(true);
-        polylineOptions.add(startLatLng)
+        routePolylineOptions.width(3F);
+        routePolylineOptions.color(Color.BLUE);
+        routePolylineOptions.geodesic(true);
+        routePolylineOptions.add(startLatLng)
 
-        routePolyline = map.addPolyline(polylineOptions)
+        routePolyline = map.addPolyline(routePolylineOptions)
 
         /*
                     PolylineOptions()

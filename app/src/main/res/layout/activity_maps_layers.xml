@@ -19,6 +19,8 @@
         android:onClick="startUpdatesButton"/>
 
 
+
+
     <Button
         android:id="@+id/stop_updates_button"
         android:layout_width="wrap_content"

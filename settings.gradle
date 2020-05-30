@@ -1,2 +1,2 @@
-rootProject.name='PathMapper'
+rootProject.name='MapsLocation'
 include ':app'

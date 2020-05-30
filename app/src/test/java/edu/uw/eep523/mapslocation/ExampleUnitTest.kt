@@ -1,4 +1,4 @@
-package com.example.pathmapper
+package edu.uw.eep523.mapslocation
 
 import org.junit.Test
 

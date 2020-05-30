@@ -22,6 +22,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
@@ -76,6 +78,10 @@ class MapsLayersActivity :
 
     private var currentlattext: String? = null
     private var currentlongtext: String? = null
+    private lateinit var routePolyline: Polyline
+    private  var polylineOptions: PolylineOptions = PolylineOptions()
+    private var startLatLng = LatLng(0.0, 0.0)
+
 
 
     /**
@@ -232,42 +238,76 @@ class MapsLayersActivity :
         if (mRequestingLocationUpdates!!) {
             start_updates_button!!.isEnabled = false
             stop_updates_button!!.isEnabled = true
+            //pause_updates_button!!.isEnabled = true
         } else {
             start_updates_button!!.isEnabled = true
             stop_updates_button!!.isEnabled = false
+            //pause_updates_button!!.isEnabled = false
         }
         if (mCurrentLocation != null) {
-            //latitude_text!!.text =getString(R.string.latitude_label) + ": " +  mCurrentLocation!!.latitude
-            //longitude_text!!.text = getString(R.string.longitude_label) + ": " +  mCurrentLocation!!.longitude
-            //last_update_time_text!!.text = getString( R.string.last_update_time_label) + ": " + mLastUpdateTime
 
-            currentlattext = getString(R.string.latitude_label) + ": " +  mCurrentLocation!!.latitude
-            currentlongtext = getString(R.string.longitude_label) + ": " +  mCurrentLocation!!.longitude
-
-
-            //String latlongtext = (latitude_text!!.text as String) + " " +(longitude_text!!.text as String)
-            Log.i("LATLONG", (currentlattext as String) + " " +(currentlongtext as String))
-
-                val polyline1 = map.addPolyline(
-                PolylineOptions()
-                    .clickable(true)
-                    .add(
-                        LatLng(47.605975, -122.303098),
-                        LatLng(47.633620, -122.304497)
-                    )
-            )
-
-
+            updateRoute()
 // latitude_text!!.text as Double, latitude_text!!.text as Double
 
         }
     }
 
+    private fun updateRoute(){
+
+        // log location updates
+        currentlattext = getString(R.string.latitude_label) + ": " +  mCurrentLocation!!.latitude
+        currentlongtext = getString(R.string.longitude_label) + ": " +  mCurrentLocation!!.longitude
+        //String latlongtext = (latitude_text!!.text as String) + " " +(longitude_text!!.text as String)
+        Log.i("LATLONG", (currentlattext as String) + " " +(currentlongtext as String))
+
+        Log.i("NUPDATES", (nupdates.toString()))
+
+        startLatLng = LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude)
+
+
+        if(nupdates == 0 ){
+            initPolyline()
+        }
+        else{
+            polylineOptions.points.add(LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude))
+
+            routePolyline.remove()
+            routePolyline = map.addPolyline(polylineOptions)
+
+            //polylineOptions.points.toList().toString()
+
+            //Log.i("points", polylineOptions.points.toList().toString())
+        }
+
+
+    }
+
+
+    private fun initPolyline(){
+
+        polylineOptions.width(2F);
+        polylineOptions.color(Color.RED);
+        polylineOptions.geodesic(true);
+        polylineOptions.add(startLatLng)
+
+        routePolyline = map.addPolyline(polylineOptions)
+
+        /*
+                    PolylineOptions()
+                .clickable(true)
+                .add(
+                    LatLng(47.605975, -122.303098),
+                    LatLng(47.633620, -122.304497)
+                )
+         */
+
+    }
 
     /**
      * Removes location updates from the FusedLocationApi.
      */
     private fun stopLocationUpdates() {
+        nupdates = 0
         // It is a good practice to remove location requests when the activity is in a paused or
         // stopped state. Doing so helps battery performance and is especially
         // recommended in applications that request frequent location updates.
@@ -275,7 +315,8 @@ class MapsLayersActivity :
             .addOnCompleteListener(this) {
                 mRequestingLocationUpdates = false
                 updateUI()
-                map.clear()
+                //map.clear()
+                routePolyline.remove();
             }
     }
 

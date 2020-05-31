@@ -20,6 +20,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -45,6 +46,8 @@ import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
+import java.io.File
+import java.io.FileOutputStream
 import java.text.DateFormat
 import java.util.*
 
@@ -210,6 +213,7 @@ class MapsLayersActivity :
         // stopped state. Doing so helps battery performance and is especially
         // recommended in applications that request frequent location updates.
         stopLocationUpdates()
+        saveRouteToFile()
     }
 
     /**
@@ -525,6 +529,67 @@ class MapsLayersActivity :
                 Log.e(TAG, "Error setting layer with name ${spinner.selectedItem}")
             }
         }
+    }
+
+    private fun saveRouteToFile(){
+        //TODO - figure out how to save to a file
+        // text_to_save = polylineToGeoJSON(routePolyline)
+
+        /*
+                val file:String = "testfilename.txt".toString()
+        val data:String = polylineToGeoJSON(routePolyline).toString()
+        val fileOutputStream: FileOutputStream
+        try {
+            fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
+            fileOutputStream.write(data.toByteArray())
+        }catch (e: Exception){
+            e.printStackTrace()
+            Log.e("filewrite", "file write exception")
+        }
+         */
+    }
+
+    private fun polylineToGeoJSON(polyline: Polyline): String {
+
+        var geojsonstring: String = ""
+        var gjarray: MutableList<String> = ArrayList()
+
+        /*
+        example geojson:
+
+        {
+           "type": "Feature",
+           "geometry": {
+               "type": "LineString",
+               "coordinates": [
+                   [-50.0,-10.0],[50.0,-10.0],[50.0,10.0],[-50.0,10.0]
+               ]
+           },
+           "properties": {
+               "prop0": "value0",
+               "prop1": "value1"
+         }
+         */
+
+        var geojson_string_beginning: String =
+            "{\"type\": \"Feature\",\"geometry\": {\"type\": \"LineString\",\"coordinates\": "
+
+        var geojson_string_ending: String =
+            "},\"properties\": {\"prop0\": \"value0\",\"prop1\": \"value1\"}"
+
+        routePolyline.points.toList().forEach {
+            e ->
+            var gjstring: String = e.toString().replace("lat/lng: (", "[", true).replace(")", "]", true)
+            gjarray.add(gjstring)
+
+        }
+
+        geojsonstring = geojson_string_beginning+ gjarray.toString() + geojson_string_ending
+
+        //Log.e("RTLIST", geojsonstring)
+
+        return geojsonstring
+
     }
 
 

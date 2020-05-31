@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     fun startLayers(v: View){
         val intent = Intent(this, MapsLayersActivity::class.java).apply {}
         startActivity(intent)
-
     }
 
 

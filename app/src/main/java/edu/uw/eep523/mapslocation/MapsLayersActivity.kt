@@ -319,8 +319,64 @@ class MapsLayersActivity :
                 //map.clear()
                 routePolyline.remove();
             }
+
+        launchSavePopup()
     }
 
+
+    private fun launchSavePopup(){
+
+        val btn = findViewById<Button>(R.id.stop_updates_button) as Button
+
+        /*Create Object Of PopupMenu
+            we need to pas  Context and View (Our View is Button so we pass btn to it)
+            */
+
+        val popUp = PopupMenu(this, btn)
+
+        //Inflate our menu Layout.
+        popUp.menuInflater.inflate(R.menu.popup_menu, popUp.menu)
+
+
+        //Set Click Listener on Popup Menu Item
+        popUp.setOnMenuItemClickListener { myItem ->
+
+            //Getting Id of selected Item
+            val item = myItem!!.itemId
+
+            when (item) {
+                R.id.saveRoute -> {
+                    Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
+                }
+
+                R.id.cancelRoute -> {
+                    cancelRoute()
+                }
+            }
+
+            true
+        }
+        popUp.show()
+    }
+
+    private fun cancelRoute(){
+        // reset all variables
+        nupdates = 0
+        currentlattext= null
+        currentlongtext = null
+        routePolyline.remove()
+        routePolylineOptions = PolylineOptions()
+        startLatLng = LatLng(0.0, 0.0)
+        cumulativeLength = 0.0
+        prevLat = 0.0
+        prevLong = 0.0
+
+        // clear UI
+        map.clear()
+        km_test.text = "Distance: " + "%.3f".format(cumulativeLength).toDouble().toString() + " km"
+
+        Toast.makeText(this, "Cancelled route mapping.", Toast.LENGTH_LONG).show()
+    }
 
     /**
      * Stores activity data in the Bundle.

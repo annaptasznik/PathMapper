@@ -60,7 +60,7 @@ class MapsLayersActivity :
     AdapterView.OnItemSelectedListener,
     EasyPermissions.PermissionCallbacks {
 
-    private lateinit var myDialog: Dialog
+    private lateinit var saveRouteDialog: Dialog
 
     private val TAG = "tag"
 
@@ -99,7 +99,7 @@ class MapsLayersActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
 
-        myDialog = Dialog(this)
+        saveRouteDialog = Dialog(this)
 
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""
@@ -346,8 +346,8 @@ class MapsLayersActivity :
 
             when (item) {
                 R.id.saveRoute -> {
-                    ShowPopup()
-                    Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
+                    showSaveRoutePopup()
+                    //Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
                 }
 
                 R.id.cancelRoute -> {
@@ -360,19 +360,27 @@ class MapsLayersActivity :
         popUp.show()
     }
 
-        private fun ShowPopup() {
-        var  txtclose:TextView
-            var btnFollow : Button
+        private fun showSaveRoutePopup() {
 
-        myDialog.setContentView(R.layout.save_popup);
-        txtclose = myDialog.findViewById(R.id.cancel_save);
-        txtclose.setText("M");
-        btnFollow = myDialog.findViewById(R.id.save_button);
-        txtclose.setOnClickListener(View.OnClickListener() {
-            myDialog.dismiss()
-        })
-            myDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+            var saveRouteButton : Button
+
+            saveRouteDialog.setContentView(R.layout.save_popup);
+            var  cancel:TextView = saveRouteDialog.findViewById(R.id.cancel_save);
+
+            saveRouteButton = saveRouteDialog.findViewById(R.id.save_button);
+
+            cancel.setOnClickListener(View.OnClickListener() {
+                saveRouteDialog.dismiss()
+            })
+
+            saveRouteButton.setOnClickListener(View.OnClickListener() {
+                // do stuff
+                Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
+
+            })
+
+            saveRouteDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            saveRouteDialog.show();
     }
 
     private fun cancelRoute(){
@@ -381,6 +389,7 @@ class MapsLayersActivity :
         currentlattext= null
         currentlongtext = null
         routePolyline.remove()
+        routePolyline.points.clear()
         routePolylineOptions = PolylineOptions()
         startLatLng = LatLng(0.0, 0.0)
         cumulativeLength = 0.0

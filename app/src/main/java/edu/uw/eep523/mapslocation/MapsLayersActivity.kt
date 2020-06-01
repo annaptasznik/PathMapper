@@ -255,7 +255,6 @@ class MapsLayersActivity :
         if (mCurrentLocation != null) {
 
             updateRoute()
-// latitude_text!!.text as Double, latitude_text!!.text as Double
 
         }
     }
@@ -285,14 +284,8 @@ class MapsLayersActivity :
             routePolyline.remove()
             routePolyline = map.addPolyline(routePolylineOptions)
 
-            //polylineOptions.points.toList().toString()
-
-            //Log.i("points", polylineOptions.points.toList().toString())
             cumulativeLength = cumulativeLength + haversine(prevLat, prevLong,mCurrentLocation!!.latitude, mCurrentLocation!!.longitude )
             Log.i("cum_length", cumulativeLength.toString())
-
-
-
 
             km_test.text = "Distance: " + "%.3f".format(cumulativeLength).toDouble().toString() + " km"
         }
@@ -308,15 +301,6 @@ class MapsLayersActivity :
         routePolylineOptions.add(startLatLng)
 
         routePolyline = map.addPolyline(routePolylineOptions)
-
-        /*
-                    PolylineOptions()
-                .clickable(true)
-                .add(
-                    LatLng(47.605975, -122.303098),
-                    LatLng(47.633620, -122.304497)
-                )
-         */
 
     }
 
@@ -483,20 +467,6 @@ class MapsLayersActivity :
 
         updateMapType()
 
-
-
-        //val polyline1 = googleMap.addPolyline(
-         //   PolylineOptions()
-        //        .clickable(true)
-        //        .add(
-         //           LatLng(47.613984, -122.317908),
-         //           LatLng(47.605975, -122.303098),
-         //           LatLng(47.633620, -122.304497)
-        //        )
-        //)
-
-
-
         // check the state of all checkboxes and update the map accordingly
         with(map) {
             // deleted
@@ -517,7 +487,6 @@ class MapsLayersActivity :
         }
     }
 
-    // startRecordingButton
 
     @SuppressLint("MissingPermission")
     @AfterPermissionGranted(LOCATION_PERMISSION_REQUEST_CODE)
@@ -639,15 +608,6 @@ class MapsLayersActivity :
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
-        // Do nothing.
-    }
-
-
-    fun startPathRecording() {
-        // Do nothing.
-    }
-
-    fun stopPathRecording() {
         // Do nothing.
     }
 

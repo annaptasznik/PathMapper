@@ -20,17 +20,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
-import android.provider.Settings
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -43,14 +41,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
-import java.io.File
-import java.io.FileOutputStream
 import java.text.DateFormat
 import java.util.*
+import android.widget.Button;
 
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -63,6 +59,8 @@ class MapsLayersActivity :
     OnMapReadyCallback,
     AdapterView.OnItemSelectedListener,
     EasyPermissions.PermissionCallbacks {
+
+    private lateinit var myDialog: Dialog
 
     private val TAG = "tag"
 
@@ -100,6 +98,8 @@ class MapsLayersActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
+
+        myDialog = Dialog(this)
 
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""
@@ -346,6 +346,7 @@ class MapsLayersActivity :
 
             when (item) {
                 R.id.saveRoute -> {
+                    ShowPopup()
                     Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
                 }
 
@@ -357,6 +358,21 @@ class MapsLayersActivity :
             true
         }
         popUp.show()
+    }
+
+        private fun ShowPopup() {
+        var  txtclose:TextView
+            var btnFollow : Button
+
+        myDialog.setContentView(R.layout.save_popup);
+        txtclose = myDialog.findViewById(R.id.cancel_save);
+        txtclose.setText("M");
+        btnFollow = myDialog.findViewById(R.id.save_button);
+        txtclose.setOnClickListener(View.OnClickListener() {
+            myDialog.dismiss()
+        })
+            myDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 
     private fun cancelRoute(){

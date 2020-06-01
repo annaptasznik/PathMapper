@@ -99,7 +99,7 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
         val name  =    routeFilenameEt.text.toString()
         val routeDate  = routeDateEt.text.toString()
         val routeCategory  = routeCategoryEt.text.toString()
-        val routeDistance = routeCategoryEt.text.toString().toDouble()
+        val routeDistance = routeDistanceEt.text.toString().toDouble()
         val id =  databaseHelper.updateData(name,routeDate,routeCategory,employeeData!!.id, routeDistance)
         if(id>0){
             Message.message(this,"Updated successfully")

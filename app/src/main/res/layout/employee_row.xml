@@ -29,6 +29,14 @@
         android:textSize="@dimen/sp_16"
         android:textColor="@color/black"/>
 
+        <TextView
+        android:id="@+id/routeDistanceTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="26"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/black"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"

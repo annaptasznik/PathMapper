@@ -57,6 +57,7 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
         routeFilenameEt.setText(employeeData.routeFilename)
         routeDateEt.setText(employeeData.routeDate)
         routeCategoryEt.setText(employeeData.routeCategory)
+        routeDistanceEt.setText(employeeData.routeDistance.toString())
         saveBtn.setText(getString(R.string.update))
     }
 
@@ -79,10 +80,11 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
     }
 
     private fun dataIsValid(): Boolean {
-        val routeFilename  =    routeFilenameEt.text.toString()
+        val name  =    routeFilenameEt.text.toString()
         val routeDate  = routeDateEt.text.toString()
         val routeCategory  = routeCategoryEt.text.toString()
-        if(routeFilename.isNullOrEmpty() || routeDate.isNullOrEmpty() || routeCategory.isNullOrEmpty()){
+        val routeDistance  = routeDistanceEt.text.toString()
+        if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){
             Message.message(this,"Please fill all the fields")
             return false
         }else{
@@ -94,10 +96,11 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is responsible to update data in db
      */
     private fun updateInDb() {
-        val routeFilename  =    routeFilenameEt.text.toString()
+        val name  =    routeFilenameEt.text.toString()
         val routeDate  = routeDateEt.text.toString()
         val routeCategory  = routeCategoryEt.text.toString()
-        val id =  databaseHelper.updateData(routeFilename,routeDate,routeCategory,employeeData!!.id)
+        val routeDistance = routeCategoryEt.text.toString().toDouble()
+        val id =  databaseHelper.updateData(name,routeDate,routeCategory,employeeData!!.id, routeDistance)
         if(id>0){
             Message.message(this,"Updated successfully")
             finish()
@@ -110,15 +113,16 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is used to save data in db
      */
     private fun saveDataInDb() {
-        val routeFilename  =    routeFilenameEt.text.toString()
+        val name  =    routeFilenameEt.text.toString()
         val routeDate  = routeDateEt.text.toString()
         val routeCategory  = routeCategoryEt.text.toString()
-        val id = databaseHelper.insertData(routeFilename,routeDate,routeCategory)
+        val routeDistance  = routeCategoryEt.text.toString()
+        val id = databaseHelper.insertData(name,routeDate,routeCategory, routeDistance)
         if(id>0){
             Message.message(this,"successfully inserted a row")
             finish()
         }else{
-            Message.message(this,"Unsuccessful")
+            Message.message(this,"Unsuccessfull")
         }
     }
 }

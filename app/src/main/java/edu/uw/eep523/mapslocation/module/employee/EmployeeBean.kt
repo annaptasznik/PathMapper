@@ -7,4 +7,5 @@ class EmployeeBean : Serializable {
     var routeCategory = ""
     var routeDate  = ""
     var id = -1
+    var routeDistance  = 0.0
 }

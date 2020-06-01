@@ -31,6 +31,7 @@ class EmployeeAdapter(data:ArrayList<EmployeeBean>): RecyclerView.Adapter<Recycl
             holder.routeFilenameTv.setText(item.routeFilename)
             holder.routeCategoryTv.setText(item.routeCategory)
             holder.routeDate.setText(item.routeDate)
+            holder.routeDistance.setText(item.routeDistance.toString())
         }
     }
 
@@ -38,6 +39,7 @@ class EmployeeAdapter(data:ArrayList<EmployeeBean>): RecyclerView.Adapter<Recycl
         val routeFilenameTv = itemView.routeFilenameTv
         val  routeCategoryTv = itemView.routeCategoryTv
         val routeDate = itemView.routeDateTv
+        val routeDistance = itemView.routeDistanceTv
         val container = itemView.rowContainer.setOnClickListener(this)
         override fun onClick(view: View?) {
             clickListener.itemClickListener(view!!,position)

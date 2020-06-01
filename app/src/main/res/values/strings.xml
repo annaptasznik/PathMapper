@@ -5,6 +5,7 @@
     <string name="routeFilename">routeFilename :</string>
     <string name="routeDate">routeDate :</string>
     <string name="routeCategory">routeCategory :</string>
+    <string name="routeDistance">routeDistance :</string>
 
     <string name="add_data">Add Employee Data</string>
     <string name="save">Save</string>

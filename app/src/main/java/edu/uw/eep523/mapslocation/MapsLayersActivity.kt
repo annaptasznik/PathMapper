@@ -43,6 +43,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -84,6 +85,9 @@ class MapsLayersActivity :
     private lateinit var routePolyline: Polyline
     private  var routePolylineOptions: PolylineOptions = PolylineOptions()
     private var startLatLng = LatLng(0.0, 0.0)
+    private var cumulativeLength : Double = 0.0
+    private var prevLat: Double = 0.0
+    private var prevLong: Double = 0.0
 
 
 
@@ -266,10 +270,13 @@ class MapsLayersActivity :
 
         Log.i("NUPDATES", (nupdates.toString()))
 
-        startLatLng = LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude)
+
 
 
         if(nupdates == 0 ){
+            startLatLng = LatLng(mCurrentLocation!!.latitude,mCurrentLocation!!.longitude)
+            prevLat = mCurrentLocation!!.latitude
+            prevLong = mCurrentLocation!!.longitude
             initPolyline()
         }
         else{
@@ -281,8 +288,14 @@ class MapsLayersActivity :
             //polylineOptions.points.toList().toString()
 
             //Log.i("points", polylineOptions.points.toList().toString())
-        }
+            cumulativeLength = cumulativeLength + haversine(prevLat, prevLong,mCurrentLocation!!.latitude, mCurrentLocation!!.longitude )
+            Log.i("cum_length", cumulativeLength.toString())
 
+
+
+
+            km_test.text = "Distance: " + "%.3f".format(cumulativeLength).toDouble().toString() + " km"
+        }
 
     }
 
@@ -417,6 +430,19 @@ class MapsLayersActivity :
         }
     }
 
+    private fun computeLength(){
+        //computeLength(routePolyline)
+    }
+
+    private fun haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double{
+            var km: Double = 0.0
+            var p: Double = 0.017453292519943295;    // Math.PI / 180
+            var a : Double = 0.5 - kotlin.math.cos((lat2 - lat1) * p)/2 +
+                    kotlin.math.cos(lat1 * p) * kotlin.math.cos(lat2 * p) *
+                    (1 - kotlin.math.cos((lon2 - lon1) * p))/2;
+            km = 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+            return km
+    }
 
 
     companion object {
@@ -615,6 +641,7 @@ class MapsLayersActivity :
     override fun onNothingSelected(parent: AdapterView<*>) {
         // Do nothing.
     }
+
 
     fun startPathRecording() {
         // Do nothing.

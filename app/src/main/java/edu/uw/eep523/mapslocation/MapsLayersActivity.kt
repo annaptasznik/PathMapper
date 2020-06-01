@@ -377,6 +377,14 @@ class MapsLayersActivity :
                 // do stuff
                 Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
 
+                // TODO: get filename text
+
+                // TODO: get spinner value
+
+                //TODO: send package of data to AddDataActivity
+                // filename, category, date, distance
+
+
             })
 
             saveRouteDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));

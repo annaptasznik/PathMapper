@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/nameTv"
+        android:id="@+id/routeFilenameTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rinky"
@@ -14,15 +14,15 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/emailTv"
+        android:id="@+id/routeDateTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"
+        android:text="@string/routeDate"
         android:textSize="@dimen/sp_16"
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/ageTv"
+        android:id="@+id/routeCategoryTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="26"

@@ -22,10 +22,10 @@
 
             <TextView
                 style="@style/row_addData_textview"
-                android:text="@string/name" />
+                android:text="@string/routeFilename" />
 
             <EditText
-                android:id="@+id/nameEt"
+                android:id="@+id/routeFilenameEt"
                 style="@style/row_addData_edittext"/>
 
         </LinearLayout>
@@ -34,10 +34,10 @@
 
             <TextView
                 style="@style/row_addData_textview"
-                android:text="@string/email" />
+                android:text="@string/routeDate" />
 
             <EditText
-                android:id="@+id/emailEt"
+                android:id="@+id/routeDateEt"
                 style="@style/row_addData_edittext"/>
 
         </LinearLayout>
@@ -46,10 +46,10 @@
 
             <TextView
                 style="@style/row_addData_textview"
-                android:text="@string/age" />
+                android:text="@string/routeCategory" />
 
             <EditText
-                android:id="@+id/ageEt"
+                android:id="@+id/routeCategoryEt"
                 style="@style/row_addData_edittext"/>
 
         </LinearLayout>

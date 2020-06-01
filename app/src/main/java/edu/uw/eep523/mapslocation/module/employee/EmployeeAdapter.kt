@@ -28,16 +28,16 @@ class EmployeeAdapter(data:ArrayList<EmployeeBean>): RecyclerView.Adapter<Recycl
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder is EmployeeViewHolder){
             val item= employeeList[position]
-            holder.nameTv.setText(item.name)
-            holder.ageTv.setText(item.age.toString())
-            holder.email.setText(item.email)
+            holder.routeFilenameTv.setText(item.routeFilename)
+            holder.routeCategoryTv.setText(item.routeCategory)
+            holder.routeDate.setText(item.routeDate)
         }
     }
 
     inner class EmployeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener{
-        val nameTv = itemView.nameTv
-        val  ageTv = itemView.ageTv
-        val email = itemView.emailTv
+        val routeFilenameTv = itemView.routeFilenameTv
+        val  routeCategoryTv = itemView.routeCategoryTv
+        val routeDate = itemView.routeDateTv
         val container = itemView.rowContainer.setOnClickListener(this)
         override fun onClick(view: View?) {
             clickListener.itemClickListener(view!!,position)

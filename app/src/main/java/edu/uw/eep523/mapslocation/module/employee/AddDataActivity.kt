@@ -54,9 +54,9 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is responsible to set data in ui
      */
     private fun setData(employeeData: EmployeeBean) {
-        nameEt.setText(employeeData.name)
-        emailEt.setText(employeeData.email)
-        ageEt.setText(employeeData.age.toString())
+        routeFilenameEt.setText(employeeData.routeFilename)
+        routeDateEt.setText(employeeData.routeDate)
+        routeCategoryEt.setText(employeeData.routeCategory)
         saveBtn.setText(getString(R.string.update))
     }
 
@@ -79,10 +79,10 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
     }
 
     private fun dataIsValid(): Boolean {
-        val name  =    nameEt.text.toString()
-        val email  = emailEt.text.toString()
-        val age  = ageEt.text.toString()
-        if(name.isNullOrEmpty() || email.isNullOrEmpty() || age.isNullOrEmpty()){
+        val routeFilename  =    routeFilenameEt.text.toString()
+        val routeDate  = routeDateEt.text.toString()
+        val routeCategory  = routeCategoryEt.text.toString()
+        if(routeFilename.isNullOrEmpty() || routeDate.isNullOrEmpty() || routeCategory.isNullOrEmpty()){
             Message.message(this,"Please fill all the fields")
             return false
         }else{
@@ -94,10 +94,10 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is responsible to update data in db
      */
     private fun updateInDb() {
-        val name  =    nameEt.text.toString()
-        val email  = emailEt.text.toString()
-        val age  = ageEt.text.toString().toInt()
-        val id =  databaseHelper.updateData(name,email,age,employeeData!!.id)
+        val routeFilename  =    routeFilenameEt.text.toString()
+        val routeDate  = routeDateEt.text.toString()
+        val routeCategory  = routeCategoryEt.text.toString()
+        val id =  databaseHelper.updateData(routeFilename,routeDate,routeCategory,employeeData!!.id)
         if(id>0){
             Message.message(this,"Updated successfully")
             finish()
@@ -110,15 +110,15 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is used to save data in db
      */
     private fun saveDataInDb() {
-        val name  =    nameEt.text.toString()
-        val email  = emailEt.text.toString()
-        val age  = ageEt.text.toString().toInt()
-        val id = databaseHelper.insertData(name,email,age)
+        val routeFilename  =    routeFilenameEt.text.toString()
+        val routeDate  = routeDateEt.text.toString()
+        val routeCategory  = routeCategoryEt.text.toString()
+        val id = databaseHelper.insertData(routeFilename,routeDate,routeCategory)
         if(id>0){
             Message.message(this,"successfully inserted a row")
             finish()
         }else{
-            Message.message(this,"Unsuccessfull")
+            Message.message(this,"Unsuccessful")
         }
     }
 }

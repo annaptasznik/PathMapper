@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="275dp"
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
     android:layout_gravity="center"
     android:background="@color/quantum_white_text"
     android:orientation="vertical"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Filename" />
+            android:hint="Filename" />
 
         <TextView
             android:id="@+id/blanktext"
@@ -39,30 +39,39 @@
             android:layout_height="wrap_content"
             android:text="" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select a Category:" />
-
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:animationCache="false" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Select or Add Category" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="31dp"
+        android:layout_height="38dp"
+        android:layout_alignLeft="@+id/editText1"
+        android:text="+" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1" />
 
 </LinearLayout>
+
+
+
+
+

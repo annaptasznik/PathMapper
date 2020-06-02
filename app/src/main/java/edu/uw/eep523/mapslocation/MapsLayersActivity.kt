@@ -89,6 +89,19 @@ class MapsLayersActivity :
     lateinit var adapter: ArrayAdapter<String>
 
     lateinit var dialog :AlertDialog.Builder
+    lateinit var dialogView: View
+
+
+    var SPINNER: Spinner? = null
+    var ADD: Button? = null
+    var EDITTEXT: EditText? = null
+    var spinnerItems = arrayOf(
+        "Cycle",
+        "Run"
+    )
+    var GETTEXT: String? = null
+    var stringlist: MutableList<String>? = null
+    var arrayadapter: ArrayAdapter<String>? = null
 
 
 
@@ -175,10 +188,11 @@ class MapsLayersActivity :
         }
 
         fun addToSpinnerAction(){
-            spinnerArray.add("a field")
-            adapter.notifyDataSetChanged()
             Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show();
         }
+
+
+
 
 
 
@@ -186,37 +200,15 @@ class MapsLayersActivity :
         dialog = AlertDialog.Builder(this)
         val cancel = dialog.create()
 
-        val dialogView = layoutInflater.inflate(R.layout.save_popup, null) // try not null?
+         dialogView = layoutInflater.inflate(R.layout.save_popup, null) // try not null?
         val filenameField = dialogView.findViewById<EditText>(R.id.filename_field)
 
         dialog.setView(dialogView)
         dialog.setCancelable(false)
         dialog.setTitle("Save Route")
+
         dialog.setPositiveButton("Save", {dialogInterface: DialogInterface, i: Int -> posButtonAction(filenameField.text.toString()) })
         dialog.setNegativeButton("Cancel", {dialogInterface: DialogInterface, i: Int -> negButtonAction()})
-
-
-
-
-        // you need to have a list of data that you want the spinner to display
-
-
-        spinnerArray.add("item1")
-        spinnerArray.add("item2")
-
-        adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray)
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        var sItems: Spinner = dialogView.findViewById(R.id.spinner) // this was what I was missing! the dialogView. part. would probably work outside of alert dialog
-        sItems.setAdapter(adapter)
-        //val customDialog = dialog.create()
-
-        dialog.setNeutralButton("Add To Spinner", {dialogInterface: DialogInterface, i: Int -> addToSpinnerAction()})
-        //spinnerArray.add("a field");
-
-
-
-
 
 
     }
@@ -409,6 +401,27 @@ class MapsLayersActivity :
                     // do new thing
                     //newthing()
                     dialog.show()
+
+
+                    SPINNER = dialogView.findViewById(R.id.spinner1) as Spinner
+                    ADD = dialogView.findViewById(R.id.button1) as Button
+                    EDITTEXT = dialogView.findViewById(R.id.editText1) as EditText
+                    stringlist =
+                        ArrayList(Arrays.asList(*spinnerItems))
+                    stringlist =
+                        ArrayList(Arrays.asList(*spinnerItems))
+                    arrayadapter = ArrayAdapter(this, R.layout.textview,
+                        stringlist as ArrayList<String>
+                    )
+                    arrayadapter!!.setDropDownViewResource(R.layout.textview)
+                    SPINNER!!.adapter = arrayadapter
+                    ADD!!.setOnClickListener {
+                        // TODO Auto-generated method stub
+                        GETTEXT = EDITTEXT!!.text.toString()
+                        (stringlist as ArrayList<String>).add(GETTEXT!!)
+                        arrayadapter!!.notifyDataSetChanged()
+                        Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show()
+                    }
 
                 }
 

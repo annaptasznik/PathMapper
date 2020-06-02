@@ -21,10 +21,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -46,7 +46,6 @@ import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 import java.text.DateFormat
 import java.util.*
-import android.widget.Button;
 
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -86,6 +85,10 @@ class MapsLayersActivity :
     private var cumulativeLength : Double = 0.0
     private var prevLat: Double = 0.0
     private var prevLong: Double = 0.0
+    var spinnerArray: MutableList<String> =  ArrayList()
+    lateinit var adapter: ArrayAdapter<String>
+
+    lateinit var dialog :AlertDialog.Builder
 
 
 
@@ -95,6 +98,7 @@ class MapsLayersActivity :
      */
     private var showPermissionDeniedDialog = false
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
@@ -160,6 +164,60 @@ class MapsLayersActivity :
             myToast.show()
         }
         */
+
+        fun posButtonAction(text: String){
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+        }
+
+        fun negButtonAction(){
+            val cancel = dialog.create()
+            cancel.dismiss()
+        }
+
+        fun addToSpinnerAction(){
+            spinnerArray.add("a field")
+            adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show();
+        }
+
+
+
+    //TODO
+        dialog = AlertDialog.Builder(this)
+        val cancel = dialog.create()
+
+        val dialogView = layoutInflater.inflate(R.layout.save_popup, null) // try not null?
+        val filenameField = dialogView.findViewById<EditText>(R.id.filename_field)
+
+        dialog.setView(dialogView)
+        dialog.setCancelable(false)
+        dialog.setTitle("Save Route")
+        dialog.setPositiveButton("Save", {dialogInterface: DialogInterface, i: Int -> posButtonAction(filenameField.text.toString()) })
+        dialog.setNegativeButton("Cancel", {dialogInterface: DialogInterface, i: Int -> negButtonAction()})
+
+
+
+
+        // you need to have a list of data that you want the spinner to display
+
+
+        spinnerArray.add("item1")
+        spinnerArray.add("item2")
+
+        adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        var sItems: Spinner = dialogView.findViewById(R.id.spinner) // this was what I was missing! the dialogView. part. would probably work outside of alert dialog
+        sItems.setAdapter(adapter)
+        //val customDialog = dialog.create()
+
+        dialog.setNeutralButton("Add To Spinner", {dialogInterface: DialogInterface, i: Int -> addToSpinnerAction()})
+        //spinnerArray.add("a field");
+
+
+
+
+
 
     }
 
@@ -346,8 +404,12 @@ class MapsLayersActivity :
 
             when (item) {
                 R.id.saveRoute -> {
-                    showSaveRoutePopup()
+                    //showSaveRoutePopup()
                     //Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
+                    // do new thing
+                    //newthing()
+                    dialog.show()
+
                 }
 
                 R.id.cancelRoute -> {
@@ -360,6 +422,8 @@ class MapsLayersActivity :
         popUp.show()
     }
 
+
+/*
         private fun showSaveRoutePopup() {
 
             var saveRouteButton : Button
@@ -390,6 +454,7 @@ class MapsLayersActivity :
             saveRouteDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
             saveRouteDialog.show();
     }
+    */
 
     private fun cancelRoute(){
         // reset all variables

@@ -666,8 +666,16 @@ class MapsLayersActivity :
 
 
     private fun saveDataInDb() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val datestring = month.toString() + "-"+ day.toString() + "-" + year.toString()
+
+
         val name  =  userFilename
-        val routeDate  = "SAVEDFROMMAP"
+        val routeDate  = datestring
         val routeCategory  = "Route Type: " + userCategory
         val routeDistance  ="Distance (km): " + "%.3f".format(cumulativeLength).toDouble().toString()
 

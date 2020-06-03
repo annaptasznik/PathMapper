@@ -13,14 +13,17 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class AddDataActivity : AppCompatActivity(),View.OnClickListener{
 
-    private var routeData: RouteDataObject? = null
-    private var actionScreen: String? = ""
     private lateinit var databaseHelper: RouteDatabaseAdapter
+
+
+    companion object{
+
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_data)
-        getDataFromIntent()
         initView()
     }
 
@@ -28,82 +31,17 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is used to init the views and add clicklisteners
      */
     private fun initView() {
-        backIv.setOnClickListener(this)
+
         saveBtn.setOnClickListener(this)
         databaseHelper = RouteDatabaseAdapter(this)
         titleTv.setText(getString(R.string.add_data_title))
     }
 
-    /**
-     * This method is responsible to get data from intent
-     */
-    private fun getDataFromIntent() {
-        if(intent.extras!!.containsKey(Constants.ACTION)){
-            actionScreen =  intent.extras!!.getString(Constants.ACTION)
-            Log.e("action_screen",actionScreen!!)
-            if(actionScreen.equals(Constants.UPDATE_SCREEN)){
-                routeData =  intent.getSerializableExtra(Constants.ROUTE_DATA) as? RouteDataObject
-                setData(routeData!!)
-            }
-        }
-    }
-
-    /**
-     * This method is responsible to set data in ui
-     */
-    private fun setData(routeData: RouteDataObject) {
-        routeFilenameEt.setText(routeData.routeFilename)
-        routeDateEt.setText(routeData.routeDate)
-        routeCategoryEt.setText(routeData.routeCategory)
-        routeDistanceEt.setText(routeData.routeDistance.toString())
-        saveBtn.setText(getString(R.string.update))
-    }
-
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.saveBtn ->{
-                if(actionScreen!!.equals(Constants.ADD_SCREEN)){
-                    if(dataIsValid()){
                         saveDataInDb()
-                    }
-                }else{
-                    if(dataIsValid())
-                        updateInDb()
-                }
             }
-            R.id.backIv ->{
-                finish()
-            }
-        }
-    }
-
-    private fun dataIsValid(): Boolean {
-        val name  =    routeFilenameEt.text.toString()
-        val routeDate  = routeDateEt.text.toString()
-        val routeCategory  = routeCategoryEt.text.toString()
-        val routeDistance  = routeDistanceEt.text.toString()
-        if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){
-            Message.message(this,"Please fill all the fields")
-            return false
-        }else{
-            return  true
-        }
-    }
-
-    /**
-     * This method is responsible to update data in db
-     */
-    private fun updateInDb() {
-        val name  =    routeFilenameEt.text.toString()
-        val routeDate  = routeDateEt.text.toString()
-        val routeCategory  = routeCategoryEt.text.toString()
-        val routeDistance = routeDistanceEt.text.toString().toDouble()
-        val id =  databaseHelper.updateData(name,routeDate,routeCategory,routeData!!.id, routeDistance)
-        if(id>0){
-            Message.message(this,"Updated successfully")
-            finish()
-        }else{
-            Message.message(this,"error while updating")
         }
     }
 
@@ -111,16 +49,23 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
      * This method is used to save data in db
      */
     private fun saveDataInDb() {
-        val name  =    routeFilenameEt.text.toString()
-        val routeDate  = routeDateEt.text.toString()
-        val routeCategory  = routeCategoryEt.text.toString()
-        val routeDistance  = routeCategoryEt.text.toString()
-        val id = databaseHelper.insertData(name,routeDate,routeCategory, routeDistance)
-        if(id>0){
-            Message.message(this,"successfully inserted a row")
-            finish()
+        val name  =    "DIDWEDOIT"
+        val routeDate  = "DIDWEDOIT"
+        val routeCategory  = "DIDWEDOIT"
+        val routeDistance  = "DIDWEDOIT"
+
+
+        if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){
+            Message.message(this,"Please fill all the fields")
         }else{
-            Message.message(this,"Unsuccessfull")
+            val id = databaseHelper.insertData(name,routeDate,routeCategory, routeDistance)
+            if(id>0){
+                Message.message(this,"Successfully inserted a row")
+                finish()
+            }else{
+                Message.message(this,"Unsuccessful")
+            }
         }
+
     }
 }

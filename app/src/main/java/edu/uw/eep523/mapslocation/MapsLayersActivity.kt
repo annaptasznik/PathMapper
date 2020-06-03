@@ -108,6 +108,9 @@ class MapsLayersActivity :
     var stringlist: MutableList<String>? = null
     var arrayadapter: ArrayAdapter<String>? = null
 
+
+    private lateinit var databaseHelper: RouteDatabaseAdapter
+
     /**
      * Flag indicating whether a requested permission has been denied after returning in
      * [.onRequestPermissionsResult].
@@ -119,7 +122,7 @@ class MapsLayersActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
 
-
+        databaseHelper = RouteDatabaseAdapter(this)
 
         saveRouteDialog = Dialog(this)
 
@@ -197,6 +200,8 @@ class MapsLayersActivity :
             //InsertData.insert(this, "a lil package")
 
             //AddDataActivity.hi(this)
+
+            saveDataInDb()
 
 
 
@@ -461,6 +466,7 @@ class MapsLayersActivity :
 
                 R.id.cancelRoute -> {
                     cancelRoute()
+
                 }
             }
 
@@ -763,6 +769,28 @@ class MapsLayersActivity :
             Log.e("filewrite", "file write exception")
         }
          */
+    }
+
+
+    private fun saveDataInDb() {
+        val name  =   userFilename
+        val routeDate  = "SAVEDFROMMAP"
+        val routeCategory  = userCategory
+        val routeDistance  = cumulativeLength.toString()
+
+
+        if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){
+            Message.message(this,"Please fill all the fields")
+        }else{
+            val id = databaseHelper.insertData(name,routeDate,routeCategory, routeDistance)
+            if(id>0){
+                Message.message(this,"Successfully inserted a row")
+                finish()
+            }else{
+                Message.message(this,"Unsuccessful")
+            }
+        }
+
     }
 
     private fun polylineToGeoJSON(polyline: Polyline): String {

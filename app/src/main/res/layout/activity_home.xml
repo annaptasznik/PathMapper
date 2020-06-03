@@ -57,16 +57,4 @@
     </FrameLayout>
 
 
-    <TextView
-        android:id="@+id/addDataTv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:textSize="@dimen/sp_30"
-        android:textStyle="bold|italic"
-        android:text="@string/add_data"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>

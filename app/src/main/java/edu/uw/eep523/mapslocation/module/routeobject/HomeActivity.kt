@@ -92,8 +92,8 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
     }
 
     private fun setClickListener() {
-        backIv.setOnClickListener(this)
-        addDataTv.setOnClickListener(this)
+        //backIv.setOnClickListener(this)
+        SaveToDatabase.setOnClickListener(this)
     }
 
     /**
@@ -117,25 +117,19 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
         }
     }
 
+
+    // ***
     override fun onClick(view: View?) {
         when(view?.id){
-            R.id.addDataTv ->{
+            R.id.SaveToDatabase ->{
                 goToAddDataActivity(-1)
             }
-            R.id.backIv ->{
-                openDrawer()
-            }
+
         }
 
     }
 
-    /**
-     * This method is used to open drawer
-     */
-    private fun openDrawer() {
-        drawerLayout.openDrawer(addDataTv)
 
-    }
 
     /**
      * This method is used to navigate to Add Data activity
@@ -160,10 +154,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
        goToAddDataActivity(position)
     }
 
-    fun SaveToDatabase(view: View) {
 
 
-        Log.e("SAVETODATABASE", "Clicked")
-    }
 
 }

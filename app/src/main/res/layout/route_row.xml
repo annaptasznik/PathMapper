@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rinky"
-        android:textSize="@dimen/sp_30"
+        android:textSize="@dimen/sp_20"
         android:textColor="@color/black"/>
 
     <TextView

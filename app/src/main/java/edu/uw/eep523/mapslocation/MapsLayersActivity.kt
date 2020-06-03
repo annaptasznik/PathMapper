@@ -42,6 +42,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import edu.uw.eep523.mapslocation.module.routeobject.AddDataActivity
+import edu.uw.eep523.mapslocation.module.routeobject.HomeActivity
+import edu.uw.eep523.mapslocation.module.routeobject.RouteDataObject
+import edu.uw.eep523.mapslocation.module.routeobject.RouteDataObjectAdapter
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -107,6 +110,10 @@ class MapsLayersActivity :
     var GETTEXT: String? = null
     var stringlist: MutableList<String>? = null
     var arrayadapter: ArrayAdapter<String>? = null
+
+    private var routeList= ArrayList<RouteDataObject>()
+    var routeDataObjectAdapter = RouteDataObjectAdapter(routeList)
+
 
     /**
      * Flag indicating whether a requested permission has been denied after returning in
@@ -193,6 +200,13 @@ class MapsLayersActivity :
 
             Toast.makeText(this, text + " " + userCategory, Toast.LENGTH_LONG).show()
 
+            val datapackage:String = "pack o' data"
+
+            /*
+            val intent = Intent(this, AddDataActivity::class.java)
+            //intent.putExtra("key", datapackage)
+            startActivity(intent)
+            */
             //sendDataToDB()
 
 
@@ -200,8 +214,12 @@ class MapsLayersActivity :
 
         fun negButtonAction(){
             val cancel = dialog.create()
+
             cancel.dismiss()
+
         }
+
+
 
         fun addToSpinnerAction(){
             Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show();
@@ -455,7 +473,17 @@ class MapsLayersActivity :
                 }
 
                 R.id.cancelRoute -> {
-                    cancelRoute()
+                    //cancelRoute()
+                    constructRouteData()
+
+
+
+
+
+
+
+
+
                 }
             }
 
@@ -464,6 +492,22 @@ class MapsLayersActivity :
         popUp.show()
     }
 
+    private fun constructRouteData(){
+        var routeDataO: RouteDataObject = RouteDataObject()
+        routeDataO.routeFilename = "Do you work"
+        routeDataO.routeDistance = 99.0
+        routeDataO.routeCategory ="Fack"
+        routeDataO.routeDate = "Fack"
+        routeDataO.id = 0
+
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("routeFilename", routeDataO.routeFilename)
+        intent.putExtra("routeDistance", routeDataO.routeDistance.toString())
+        intent.putExtra("routeCategory", routeDataO.routeCategory )
+        intent.putExtra("routeDate",routeDataO.routeDate )
+        intent.putExtra("id",  routeDataO.id.toString())
+        startActivity(intent)
+    }
 
 /*
         private fun showSaveRoutePopup() {

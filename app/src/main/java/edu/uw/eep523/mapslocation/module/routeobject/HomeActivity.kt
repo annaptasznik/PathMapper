@@ -2,7 +2,9 @@ package edu.uw.eep523.mapslocation.module.routeobject
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.uw.eep523.mapslocation.*
@@ -13,10 +15,50 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
     private lateinit var databaseHelper: RouteDatabaseAdapter
     private var routeList= ArrayList<RouteDataObject>()
     private lateinit var routeDataObjectAdapter : RouteDataObjectAdapter
+    private var Groutefilename = ""
+    private var GrouteDate= ""
+    private var GrouteCategory= ""
+    private var GrouteDistance= ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        ///
+        val routefilename = intent.getStringExtra("routeFilename")
+        val routeDistance = intent.getStringExtra("routeDistance")
+        val routeCategory = intent.getStringExtra("routeCategory")
+        val routeDate = intent.getStringExtra("routeDate")
+        val id = intent.getStringExtra("id")
+
+
+
+        if(routeCategory != null) {
+            Log.e("routeDistance", routeDistance.toString())
+            Toast.makeText(this,  routeCategory, Toast.LENGTH_LONG)
+
+
+            var RDO: RouteDataObject = RouteDataObject()
+            RDO.routeFilename = routefilename
+            RDO.routeDistance = routeDistance.toDouble()
+            RDO.routeCategory = routeCategory
+            RDO.routeDate = routeDate
+            RDO.id = id.toInt()
+
+            // add the data to the db
+            routeList.add(RDO)
+
+            Log.e("routeList", routeList.size.toString())
+
+        }
+        else{
+            Log.e("routeCategory", "null")
+            Toast.makeText(this,  "no toast", Toast.LENGTH_LONG)
+        }
+        ///
+
+
         initView()
     }
 
@@ -34,6 +76,14 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
         routeDataObjectAdapter.setOnClickListener(this)
         routeRecylerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         routeRecylerview.adapter = routeDataObjectAdapter
+
+        ///
+        if(Groutefilename != ""){
+            val id =databaseHelper.insertData(Groutefilename,GrouteDate, GrouteCategory, GrouteDistance)
+            goToAddDataActivity(-1)
+        }
+        ///
+
     }
 
     fun startLayers(v: View){

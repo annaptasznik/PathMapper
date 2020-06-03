@@ -12,11 +12,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun startMap(v: View){
-        val intent = Intent(this, MapsActivity::class.java).apply {}
-        startActivity(intent)
-
-    }
 
     fun startLayers(v: View){
         val intent = Intent(this, MapsLayersActivity::class.java).apply {}

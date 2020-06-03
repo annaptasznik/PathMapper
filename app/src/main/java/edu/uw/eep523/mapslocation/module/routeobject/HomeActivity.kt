@@ -71,18 +71,14 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
         backIv.setImageResource(R.drawable.menu_icon)
         titleTv.setText(getString(R.string.route_title))
         setClickListener()
+
         databaseHelper = RouteDatabaseAdapter(this)
         routeDataObjectAdapter = RouteDataObjectAdapter(routeList)
         routeDataObjectAdapter.setOnClickListener(this)
         routeRecylerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         routeRecylerview.adapter = routeDataObjectAdapter
 
-        ///
-        if(Groutefilename != ""){
-            val id =databaseHelper.insertData(Groutefilename,GrouteDate, GrouteCategory, GrouteDistance)
-            goToAddDataActivity(-1)
-        }
-        ///
+
 
     }
 
@@ -92,8 +88,6 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
     }
 
     private fun setClickListener() {
-        //backIv.setOnClickListener(this)
-        SaveToDatabase.setOnClickListener(this)
     }
 
     /**
@@ -120,30 +114,9 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
 
     // ***
     override fun onClick(view: View?) {
-        when(view?.id){
-            R.id.SaveToDatabase ->{
-                goToAddDataActivity(-1)
-            }
-
-        }
-
     }
 
 
-
-    /**
-     * This method is used to navigate to Add Data activity
-     */
-    private fun goToAddDataActivity(position: Int) {
-        val intent = Intent(this,AddDataActivity::class.java)
-        if(position == -1){
-            intent.putExtra(Constants.ACTION,Constants.ADD_SCREEN)
-        }else{
-            intent.putExtra(Constants.ACTION,Constants.UPDATE_SCREEN)
-            intent.putExtra(Constants.ROUTE_DATA,routeList.get(position))
-        }
-        startActivity(intent)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -151,7 +124,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
     }
 
     override fun itemClickListener(view: View, position: Int) {
-       goToAddDataActivity(position)
+
     }
 
 

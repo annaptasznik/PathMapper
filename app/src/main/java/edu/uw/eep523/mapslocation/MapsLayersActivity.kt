@@ -1,19 +1,3 @@
-/*
- * Copyright 2018 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package edu.uw.eep523.mapslocation
 
 import android.Manifest
@@ -41,7 +25,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import edu.uw.eep523.mapslocation.module.routeobject.AddDataActivity
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -51,9 +34,6 @@ import java.util.*
 
 private const val LOCATION_PERMISSION_REQUEST_CODE = 1
 
-/**
- * Demonstrates the different base layers of a map.
- */
 class MapsLayersActivity :
     AppCompatActivity(),
     OnMapReadyCallback,
@@ -174,38 +154,14 @@ class MapsLayersActivity :
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        /*
-        startRecordingButton.setOnClickListener(){
-            // do something when startRecordingButton is pressed
-            Toast.makeText(applicationContext,"this is toast message",Toast.LENGTH_SHORT).show()
-            val toast = Toast.makeText(applicationContext, "Hello Javatpoint", Toast.LENGTH_SHORT)
-            toast.show()
-            val myToast = Toast.makeText(applicationContext,"toast message with gravity",Toast.LENGTH_SHORT)
-            myToast.setGravity(Gravity.LEFT,200,200)
-            myToast.show()
-        }
-        */
 
         fun posButtonAction(text: String){
 
             // get user inputs!
             userFilename = text
-
-            //SPINNER = dialogView.findViewById(R.id.spinner1) as Spinner
             userCategory = SPINNER?.selectedItem as String
 
-            //Toast.makeText(this, text + " " + userCategory, Toast.LENGTH_LONG).show()
-
-            //sendDataToDB()
-            //InsertData.insert(this, "a lil package")
-
-            //AddDataActivity.hi(this)
-
             saveDataInDb()
-
-
-
-
         }
 
         fun negButtonAction(){
@@ -217,12 +173,6 @@ class MapsLayersActivity :
             Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show();
         }
 
-
-
-
-
-
-    //TODO
         dialog = AlertDialog.Builder(this)
         val cancel = dialog.create()
 
@@ -475,40 +425,6 @@ class MapsLayersActivity :
         popUp.show()
     }
 
-
-/*
-        private fun showSaveRoutePopup() {
-
-            var saveRouteButton : Button
-
-            saveRouteDialog.setContentView(R.layout.save_popup);
-            var  cancel:TextView = saveRouteDialog.findViewById(R.id.cancel_save);
-
-            saveRouteButton = saveRouteDialog.findViewById(R.id.save_button);
-
-            cancel.setOnClickListener(View.OnClickListener() {
-                saveRouteDialog.dismiss()
-            })
-
-            saveRouteButton.setOnClickListener(View.OnClickListener() {
-                // do stuff
-                Toast.makeText(this, "Save the route", Toast.LENGTH_LONG).show()
-
-                // TODO: get filename text
-
-                // TODO: get spinner value
-
-                //TODO: send package of data to AddDataActivity
-                // filename, category, date, distance
-
-
-            })
-
-            saveRouteDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-            saveRouteDialog.show();
-    }
-    */
-
     private fun cancelRoute(){
         // reset all variables
         nupdates = 0
@@ -570,29 +486,6 @@ class MapsLayersActivity :
             }
         }
     }
-
-
-
-
-
-    private fun sendDataToDB(){
-        //TEMP
-        userFilename = "TestFileName!"
-        userCategory = "Cycle"
-        cumulativeLength = 9.9
-
-        intent = Intent(this, AddDataActivity::class.java)
-        intent.putExtra("filename", userFilename)
-        intent.putExtra("userCategory", userCategory)
-        intent.putExtra("distance", cumulativeLength.toString())
-        intent.putExtra("date", "123456")
-
-        startActivity(intent)
-
-        //val id = databaseHelper.insertData(userFilename,"123456",userCategory, cumulativeLength.toString())
-
-    }
-
 
     /**
      * Return the current state of the permissions needed.

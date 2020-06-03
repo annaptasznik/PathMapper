@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import edu.uw.eep523.mapslocation.Constants.DELAY_SPLASH
 import edu.uw.eep523.mapslocation.R
 import edu.uw.eep523.mapslocation.module.routeobject.HomeActivity
 
@@ -16,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         handler.postDelayed({
             goToHomeActivity()
-        },DELAY_SPLASH)
+        }, 1000L)
     }
 
     /**

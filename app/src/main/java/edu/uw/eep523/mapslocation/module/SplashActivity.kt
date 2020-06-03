@@ -4,11 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import edu.uw.eep523.mapslocation.Constants.DELAY_SPLASH
-import edu.uw.eep523.mapslocation.MapsLayersActivity
 import edu.uw.eep523.mapslocation.R
-import edu.uw.eep523.mapslocation.module.employee.HomeActivity
+import edu.uw.eep523.mapslocation.module.routeobject.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     private val handler = Handler()

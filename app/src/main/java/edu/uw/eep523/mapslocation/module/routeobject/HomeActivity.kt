@@ -1,4 +1,4 @@
-package edu.uw.eep523.mapslocation.module.employee
+package edu.uw.eep523.mapslocation.module.routeobject
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListener {
-    private lateinit var databaseHelper: EmployeeDatabaseAdapter
-    private var employeeList= ArrayList<EmployeeBean>()
-    private lateinit var employeeAdapter : EmployeeAdapter
+    private lateinit var databaseHelper: RouteDatabaseAdapter
+    private var routeList= ArrayList<RouteDataObject>()
+    private lateinit var routeDataObjectAdapter : RouteDataObjectAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +27,13 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
      */
     private fun initView() {
         backIv.setImageResource(R.drawable.menu_icon)
-        titleTv.setText(getString(R.string.employee_title))
+        titleTv.setText(getString(R.string.route_title))
         setClickListener()
-        databaseHelper = EmployeeDatabaseAdapter(this)
-        employeeAdapter = EmployeeAdapter(employeeList)
-        employeeAdapter.setOnClickListener(this)
-        employeeRecylerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        employeeRecylerview.adapter = employeeAdapter
+        databaseHelper = RouteDatabaseAdapter(this)
+        routeDataObjectAdapter = RouteDataObjectAdapter(routeList)
+        routeDataObjectAdapter.setOnClickListener(this)
+        routeRecylerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        routeRecylerview.adapter = routeDataObjectAdapter
     }
 
     fun startLayers(v: View){
@@ -50,8 +50,8 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
      * This method is used to get data from db
      */
     private fun getDataFromDb() {
-        employeeList.clear()
-        employeeList.addAll( databaseHelper.getAllData())
+        routeList.clear()
+        routeList.addAll( databaseHelper.getAllData())
         showData()
     }
 
@@ -59,10 +59,10 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
      * This method will show data when list is not empty otherwise no data found ui will be shown
      */
     private fun showData() {
-        if(employeeList.size == 0){
+        if(routeList.size == 0){
             noDataFoundTv.visibility=View.VISIBLE
         }else{
-            employeeAdapter.notifyDataSetChanged()
+            routeDataObjectAdapter.notifyDataSetChanged()
             noDataFoundTv.visibility=View.GONE
         }
     }
@@ -96,7 +96,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
             intent.putExtra(Constants.ACTION,Constants.ADD_SCREEN)
         }else{
             intent.putExtra(Constants.ACTION,Constants.UPDATE_SCREEN)
-            intent.putExtra(Constants.EMPLOYEE_DATA,employeeList.get(position))
+            intent.putExtra(Constants.ROUTE_DATA,routeList.get(position))
         }
         startActivity(intent)
     }

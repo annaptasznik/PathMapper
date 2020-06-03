@@ -41,7 +41,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import edu.uw.eep523.mapslocation.module.employee.AddDataActivity
+import edu.uw.eep523.mapslocation.module.routeobject.AddDataActivity
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -107,8 +107,6 @@ class MapsLayersActivity :
     var GETTEXT: String? = null
     var stringlist: MutableList<String>? = null
     var arrayadapter: ArrayAdapter<String>? = null
-
-    //private lateinit var databaseHelper: EmployeeDatabaseAdapter
 
     /**
      * Flag indicating whether a requested permission has been denied after returning in

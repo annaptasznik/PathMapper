@@ -32,7 +32,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".module.employee.AddDataActivity"></activity>
+        <activity android:name=".module.routeobject.AddDataActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".module.SplashActivity">
             <intent-filter>
@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.employee.HomeActivity">
+        <activity android:name=".module.routeobject.HomeActivity">
         </activity>
     </application>
 

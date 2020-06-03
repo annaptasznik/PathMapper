@@ -7,10 +7,10 @@
     <string name="routeCategory">routeCategory :</string>
     <string name="routeDistance">routeDistance :</string>
 
-    <string name="add_data">Add Employee Data</string>
+    <string name="add_data">Add Route Data</string>
     <string name="save">Save</string>
     <string name="update">Update</string>
-    <string name="employee_title">Employees</string>
+    <string name="route_title">Routes</string>
     <string name="add_data_title">Add Data</string>
 
     <!--No data found text-->

@@ -1,23 +1,21 @@
-package edu.uw.eep523.mapslocation.module.employee
+package edu.uw.eep523.mapslocation.module.routeobject
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import edu.uw.eep523.mapslocation.Constants
 import edu.uw.eep523.mapslocation.R
-import edu.uw.eep523.mapslocation.EmployeeDatabaseAdapter
+import edu.uw.eep523.mapslocation.RouteDatabaseAdapter
 import edu.uw.eep523.mapslocation.Message
 import kotlinx.android.synthetic.main.activity_add_data.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class AddDataActivity : AppCompatActivity(),View.OnClickListener{
 
-    private var employeeData: EmployeeBean? = null
+    private var routeData: RouteDataObject? = null
     private var actionScreen: String? = ""
-    private lateinit var databaseHelper: EmployeeDatabaseAdapter
+    private lateinit var databaseHelper: RouteDatabaseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +30,7 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
     private fun initView() {
         backIv.setOnClickListener(this)
         saveBtn.setOnClickListener(this)
-        databaseHelper = EmployeeDatabaseAdapter(this)
+        databaseHelper = RouteDatabaseAdapter(this)
         titleTv.setText(getString(R.string.add_data_title))
     }
 
@@ -44,8 +42,8 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
             actionScreen =  intent.extras!!.getString(Constants.ACTION)
             Log.e("action_screen",actionScreen!!)
             if(actionScreen.equals(Constants.UPDATE_SCREEN)){
-                employeeData =  intent.getSerializableExtra(Constants.EMPLOYEE_DATA) as? EmployeeBean
-                setData(employeeData!!)
+                routeData =  intent.getSerializableExtra(Constants.ROUTE_DATA) as? RouteDataObject
+                setData(routeData!!)
             }
         }
     }
@@ -53,11 +51,11 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
     /**
      * This method is responsible to set data in ui
      */
-    private fun setData(employeeData: EmployeeBean) {
-        routeFilenameEt.setText(employeeData.routeFilename)
-        routeDateEt.setText(employeeData.routeDate)
-        routeCategoryEt.setText(employeeData.routeCategory)
-        routeDistanceEt.setText(employeeData.routeDistance.toString())
+    private fun setData(routeData: RouteDataObject) {
+        routeFilenameEt.setText(routeData.routeFilename)
+        routeDateEt.setText(routeData.routeDate)
+        routeCategoryEt.setText(routeData.routeCategory)
+        routeDistanceEt.setText(routeData.routeDistance.toString())
         saveBtn.setText(getString(R.string.update))
     }
 
@@ -100,7 +98,7 @@ class AddDataActivity : AppCompatActivity(),View.OnClickListener{
         val routeDate  = routeDateEt.text.toString()
         val routeCategory  = routeCategoryEt.text.toString()
         val routeDistance = routeDistanceEt.text.toString().toDouble()
-        val id =  databaseHelper.updateData(name,routeDate,routeCategory,employeeData!!.id, routeDistance)
+        val id =  databaseHelper.updateData(name,routeDate,routeCategory,routeData!!.id, routeDistance)
         if(id>0){
             Message.message(this,"Updated successfully")
             finish()

@@ -1,8 +1,8 @@
-package edu.uw.eep523.mapslocation.module.employee
+package edu.uw.eep523.mapslocation.module.routeobject
 
 import java.io.Serializable
 
-class EmployeeBean : Serializable {
+class RouteDataObject : Serializable {
     var routeFilename = ""
     var routeCategory = ""
     var routeDate  = ""

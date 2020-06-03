@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".module.employee.HomeActivity">
+    tools:context=".module.routeobject.HomeActivity">
 
 
     <FrameLayout
@@ -29,7 +29,7 @@
             <include layout="@layout/toolbar"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/employeeRecylerview"
+                android:id="@+id/routeRecylerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

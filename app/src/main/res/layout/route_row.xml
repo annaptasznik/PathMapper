@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rowContainer"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_8"
+    android:layout_marginRight="@dimen/dp_18"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/routeFilenameTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rinky"
-        android:textSize="@dimen/sp_20"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
 
     <TextView
         android:id="@+id/routeDateTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/routeDate"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_10" />
 
     <TextView
         android:id="@+id/routeCategoryTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="26"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_10" />
 
-        <TextView
+    <TextView
         android:id="@+id/routeDistanceTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="26"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_10" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/black"/>
+        android:background="@color/black" />
 </LinearLayout>

@@ -61,7 +61,7 @@ class RouteDatabaseAdapter(context: Context){
             routeDataObject.routeDate  = cursor.getString(index2)
             routeDataObject.routeCategory = cursor.getString(index3)
             routeDataObject.id = cursor.getInt(index4)
-            routeDataObject.routeDistance = cursor.getDouble(index5)
+            routeDataObject.routeDistance = cursor.getString(index5)
             routeList.add(routeDataObject)
         }
         return routeList

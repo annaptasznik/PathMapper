@@ -666,10 +666,10 @@ class MapsLayersActivity :
 
 
     private fun saveDataInDb() {
-        val name  =   userFilename
+        val name  =  userFilename
         val routeDate  = "SAVEDFROMMAP"
-        val routeCategory  = userCategory
-        val routeDistance  = cumulativeLength.toString()
+        val routeCategory  = "Route Type: " + userCategory
+        val routeDistance  ="Distance (km): " + "%.3f".format(cumulativeLength).toDouble().toString()
 
 
         if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){

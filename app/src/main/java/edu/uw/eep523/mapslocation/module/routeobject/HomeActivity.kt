@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
 
             var RDO: RouteDataObject = RouteDataObject()
             RDO.routeFilename = routefilename
-            RDO.routeDistance = routeDistance.toDouble()
+            RDO.routeDistance = routeDistance
             RDO.routeCategory = routeCategory
             RDO.routeDate = routeDate
             RDO.id = id.toInt()

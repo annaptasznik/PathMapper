@@ -31,7 +31,7 @@ class RouteDataObjectAdapter(data:ArrayList<RouteDataObject>): RecyclerView.Adap
             holder.routeFilenameTv.setText(item.routeFilename)
             holder.routeCategoryTv.setText(item.routeCategory)
             holder.routeDate.setText(item.routeDate)
-            holder.routeDistance.setText(item.routeDistance.toString())
+            holder.routeDistance.setText(item.routeDistance)
         }
     }
 

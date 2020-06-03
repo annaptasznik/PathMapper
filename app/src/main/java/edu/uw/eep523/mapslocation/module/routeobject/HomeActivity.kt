@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
 
         if(routeCategory != null) {
             Log.e("routeDistance", routeDistance.toString())
-            Toast.makeText(this,  routeCategory, Toast.LENGTH_LONG)
+            Log.e("routefilename", routefilename)
 
 
             var RDO: RouteDataObject = RouteDataObject()
@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
         }
         else{
             Log.e("routeCategory", "null")
-            Toast.makeText(this,  "no toast", Toast.LENGTH_LONG)
+
         }
         ///
 
@@ -158,6 +158,12 @@ class HomeActivity : AppCompatActivity(),View.OnClickListener, OnItemClickListen
 
     override fun itemClickListener(view: View, position: Int) {
        goToAddDataActivity(position)
+    }
+
+    fun SaveToDatabase(view: View) {
+
+
+        Log.e("SAVETODATABASE", "Clicked")
     }
 
 }

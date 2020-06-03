@@ -28,6 +28,13 @@
 
             <include layout="@layout/toolbar"/>
 
+            <Button
+                android:id="@+id/SaveToDatabase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="SaveToDatabase"
+                android:text="SaveToDatabase" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/routeRecylerview"
                 android:layout_width="match_parent"

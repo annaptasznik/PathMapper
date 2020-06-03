@@ -41,6 +41,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import edu.uw.eep523.mapslocation.module.employee.AddDataActivity
 import kotlinx.android.synthetic.main.activity_maps_layers.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -91,6 +92,10 @@ class MapsLayersActivity :
     lateinit var dialog :AlertDialog.Builder
     lateinit var dialogView: View
 
+    private var userFilename: String = ""
+    private var userCategory: String = ""
+    private var spinnerSelection: String =""
+
 
     var SPINNER: Spinner? = null
     var ADD: Button? = null
@@ -103,7 +108,7 @@ class MapsLayersActivity :
     var stringlist: MutableList<String>? = null
     var arrayadapter: ArrayAdapter<String>? = null
 
-
+    //private lateinit var databaseHelper: EmployeeDatabaseAdapter
 
     /**
      * Flag indicating whether a requested permission has been denied after returning in
@@ -115,6 +120,8 @@ class MapsLayersActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
+
+
 
         saveRouteDialog = Dialog(this)
 
@@ -179,7 +186,18 @@ class MapsLayersActivity :
         */
 
         fun posButtonAction(text: String){
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+            // get user inputs!
+            userFilename = text
+
+            //SPINNER = dialogView.findViewById(R.id.spinner1) as Spinner
+            userCategory = SPINNER?.selectedItem as String
+
+            Toast.makeText(this, text + " " + userCategory, Toast.LENGTH_LONG).show()
+
+            //sendDataToDB()
+
+
         }
 
         fun negButtonAction(){
@@ -418,10 +436,23 @@ class MapsLayersActivity :
                     ADD!!.setOnClickListener {
                         // TODO Auto-generated method stub
                         GETTEXT = EDITTEXT!!.text.toString()
+                        //userCategory = GETTEXT as String
+
+
                         (stringlist as ArrayList<String>).add(GETTEXT!!)
                         arrayadapter!!.notifyDataSetChanged()
-                        Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show()
                     }
+
+                    // TODO: get the category from user
+                    //userCategory = (dialogView.findViewById(R.id.spinner1) as Spinner).getSelectedItem().toString();
+
+
+
+                    Log.e("SpinnerSelect", userCategory)
+                    //Toast.makeText(this, userCategory + "added", Toast.LENGTH_SHORT).show()
+
+
 
                 }
 
@@ -481,6 +512,9 @@ class MapsLayersActivity :
         cumulativeLength = 0.0
         prevLat = 0.0
         prevLong = 0.0
+        userFilename = ""
+        userCategory = ""
+        spinnerSelection = ""
 
         // clear UI
         map.clear()
@@ -532,6 +566,23 @@ class MapsLayersActivity :
 
 
 
+    private fun sendDataToDB(){
+        //TEMP
+        userFilename = "TestFileName!"
+        userCategory = "Cycle"
+        cumulativeLength = 9.9
+
+        intent = Intent(this, AddDataActivity::class.java)
+        intent.putExtra("filename", userFilename)
+        intent.putExtra("userCategory", userCategory)
+        intent.putExtra("distance", cumulativeLength.toString())
+        intent.putExtra("date", "123456")
+
+        startActivity(intent)
+
+        //val id = databaseHelper.insertData(userFilename,"123456",userCategory, cumulativeLength.toString())
+
+    }
 
 
     /**

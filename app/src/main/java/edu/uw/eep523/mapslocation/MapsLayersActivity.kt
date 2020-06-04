@@ -314,6 +314,11 @@ class MapsLayersActivity :
             Log.i("cum_length", cumulativeLength.toString())
 
             km_test.text = "Distance: " + "%.3f".format(cumulativeLength).toDouble().toString() + " km"
+
+            prevLat = mCurrentLocation!!.latitude
+            prevLong = mCurrentLocation!!.longitude
+
+
         }
 
     }

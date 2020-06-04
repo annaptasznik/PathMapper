@@ -686,16 +686,14 @@ class MapsLayersActivity :
         val routeDistance  ="Distance (km): " + "%.3f".format(cumulativeLength).toDouble().toString()
 
 
-        if(name.isNullOrEmpty() || routeDate.isNullOrEmpty() ||  routeDistance.isNullOrEmpty() ||routeCategory.isNullOrEmpty()){
-            Message.message(this,"Please fill all the fields")
-        }else{
+       
             val id = databaseHelper.insertData(name,routeDate,routeCategory, routeDistance)
             if(id>0){
                 Message.message(this,"Successfully inserted a row")
                 finish()
             }else{
                 Message.message(this,"Unsuccessful")
-            }
+            
         }
 
     }

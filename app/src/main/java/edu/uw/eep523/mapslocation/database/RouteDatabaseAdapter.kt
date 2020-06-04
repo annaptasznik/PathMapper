@@ -74,7 +74,7 @@ class RouteDatabaseAdapter(context: Context){
             val querry = "CREATE TABLE "+TABLE_NAME+" ("+ KEY_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+KEY_ROUTENAME+" VARCHAR(255), "+ KEY_ROUTEDATE+" TEXT, " + KEY_ROUTECATEGORY+" TEXT," + KEY_ROUTEDISTANCE+" DOUBLE);"
             db?.execSQL(querry)
             if(db!=null){
-                Message.message(mContext,"oncreate db success" )
+               // Message.message(mContext,"oncreate db success" )
             }
         }
 

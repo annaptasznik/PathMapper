@@ -14,7 +14,7 @@
     <string name="add_data_title">Add Data</string>
 
     <!--No data found text-->
-    <string name="no_data_found">No data is inserted in db.Add your data in db while opening navigation drawer</string>
+    <string name="no_data_found">Your database is empty. Get started in the map!</string>
 
 
     <string name="app_name">PathMapper</string>
@@ -30,23 +30,7 @@
 
 
     <string name="settings">Settings</string>
-
-
-    <!-- STRINGS DEFINED FOR THE MAP AND THE STREET VIEW -->
-    <string name="basic_demo_label">Basic Map</string>
-    <string name="basic_demo_details">Launches a map with marker pointing at Sydney.</string>
-    <string name="left_arrow">\u2190</string>
-    <string name="right_arrow">\u2192</string>
-    <string name="zoom_in">+</string>
-    <string name="zoom_out">-</string>
-    <string name="go_to_bondi">Go to Bondi</string>
-    <string name="go_to_sydney">Go to Sydney</string>
-    <string name="down_arrow">\u2193</string>
-    <string name="up_arrow">\u2191</string>
-    <string name="duration">Custom Duration</string>
-
-
-
+    
     <!-- Layers Demo -->
     <string name="buildings">Buildings</string>
     <string name="hybrid">Hybrid</string>

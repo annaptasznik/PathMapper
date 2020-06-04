@@ -102,6 +102,7 @@ class MapsLayersActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps_layers)
 
+
         databaseHelper = RouteDatabaseAdapter(this)
 
         saveRouteDialog = Dialog(this)
@@ -326,7 +327,7 @@ class MapsLayersActivity :
 
     private fun initPolyline(){
 
-        routePolylineOptions.width(3F);
+        routePolylineOptions.width(4F);
         routePolylineOptions.color(Color.BLUE);
         routePolylineOptions.geodesic(true);
         routePolylineOptions.add(startLatLng)

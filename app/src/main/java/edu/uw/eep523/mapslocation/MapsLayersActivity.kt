@@ -166,8 +166,10 @@ class MapsLayersActivity :
         }
 
         fun negButtonAction(){
+            cancelRoute()
             val cancel = dialog.create()
             cancel.dismiss()
+
         }
 
         fun addToSpinnerAction(){
@@ -450,7 +452,6 @@ class MapsLayersActivity :
         // clear UI
         map.clear()
         km_test.text = "Distance: " + "%.3f".format(cumulativeLength).toDouble().toString() + " km"
-
         Toast.makeText(this, "Cancelled route mapping.", Toast.LENGTH_LONG).show()
     }
 

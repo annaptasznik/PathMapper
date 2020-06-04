@@ -1,5 +1,5 @@
 <resources>
-    <string name="sqllite">Kotlin SQLite</string>
+    <string name="sqllite">PathMapper</string>
 
     <!--Add Data Activity-->
     <string name="routeFilename">routeFilename :</string>
@@ -30,7 +30,7 @@
 
 
     <string name="settings">Settings</string>
-    
+
     <!-- Layers Demo -->
     <string name="buildings">Buildings</string>
     <string name="hybrid">Hybrid</string>

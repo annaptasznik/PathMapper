@@ -9,3 +9,5 @@ class RouteDataObject : Serializable {
     var id = -1
     var routeDistance  = ""
 }
+
+

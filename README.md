@@ -7,7 +7,9 @@ Most simply, the user can (1) record a path, (2) save distance information about
 ## App Structure
 PathMapper is designed with two major windows—the home screen and the map view. In the home screen, users can view all saved paths and view a chart summarizing them. In the map view, users can interact with a live map and record & save a new path.
 
-<p align="center">![Home Screen and Map View Image](https://github.com/annaptasznik/PathMapper/blob/master/project_images/home_and_main.PNG)</p>
+<p align="center">
+  <img src="https://github.com/annaptasznik/PathMapper/blob/master/project_images/home_and_main.PNG">
+</p>
 
 When a user stops recording, they have an option to Save or Cancel. When saving the route, the user inputs a filename and category for their event. They may also dynamically add new event categories.
 

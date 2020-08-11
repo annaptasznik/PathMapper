@@ -17,8 +17,12 @@ When a user stops recording, they have an option to Save or Cancel. When saving 
 ## Sensors and Data Management
 The phone’s GPS is the primary sensor being used in the PathMapper app. When the user chooses to begin a recording, a LocationRequest object and callback is initiated. The callback reports the user’s latitude, longitude, and the time at a constant interval.
 
-<p align="center">![Path Recording Image](https://github.com/annaptasznik/PathMapper/blob/master/project_images/path_progress.PNG)</p>
+<p align="center">
+  <img src="https://github.com/annaptasznik/PathMapper/blob/master/project_images/path_progress.PNG">
+</p>
 
 All paths and associated data are stored in a RouteDataObject and pushed to a local SQLite database. These items are displayed in a list on the home page and aggregated in a chart showing distance events by date.
 
-<p align="center">![DB of Paths Image](https://github.com/annaptasznik/PathMapper/blob/master/project_images/path_db.PNG)</p>
+<p align="center">
+  <img src="https://github.com/annaptasznik/PathMapper/blob/master/project_images/path_db.PNG">
+</p>

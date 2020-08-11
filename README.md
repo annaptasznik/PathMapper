@@ -5,7 +5,7 @@ PathMapper is an app designed for athletes who want to track runs, bicycle rides
 Most simply, the user can (1) record a path, (2) save distance information about their path, and (3) view all information from previous paths in a single interface.
 
 ## App Structure
-PathMapper is designed with two major windows—the home screen and the map view. In the home screen, users can view all saved paths and view a chart summarizing them. In the map view, users can interact with a live map and record & save a new path.
+PathMapper is designed with two major views—the home screen and the map view. In the home screen, users can view all saved paths and view a chart summarizing them. In the map view, users can interact with a live map and record & save a new path.
 
 <p align="center">
   <img src="https://github.com/annaptasznik/PathMapper/blob/master/project_images/home_and_main.PNG">
